@@ -18,7 +18,13 @@ public class CapsulesTimer : MonoBehaviour
     Slider sliderTimeLeft;
 
     [SerializeField]
-    GameObject Capsule;
+    GameObject capsule;
+
+    [SerializeField]
+    GameObject controller;
+
+    [SerializeField]
+    GameObject prefabParticles;
 
     void Start()
     {
@@ -35,14 +41,22 @@ public class CapsulesTimer : MonoBehaviour
 
         if (timer <= 0)
         {
-            Destroy(gameObject);
-
-            NewCapsule();
+            //timer = Random.Range(timeMin, timeMax);
+            DestroyCapsule();
         }
     }
 
-    void NewCapsule()
+    void DestroyCapsule()
     {
-        Instantiate(Capsule);
+        Destroy(gameObject);
+
+        Instantiate(prefabParticles, capsule.transform.position, Quaternion.identity);
+
+        Instantiate(capsule, capsule.transform.position, Quaternion.identity);
+
+        /*CapsuleCreator capsuleCreator = controller.GetComponent<CapsuleCreator>();
+        capsuleCreator.CreateCapsule();*/
     }
+
+    
 }
