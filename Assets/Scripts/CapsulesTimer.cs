@@ -57,6 +57,4 @@ public class CapsulesTimer : MonoBehaviour
         /*CapsuleCreator capsuleCreator = controller.GetComponent<CapsuleCreator>();
         capsuleCreator.CreateCapsule();*/
     }
-
-    
 }
