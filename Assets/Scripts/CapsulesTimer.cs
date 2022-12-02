@@ -29,6 +29,12 @@ public class CapsulesTimer : MonoBehaviour
         GameObject prefabParticles;
         [SerializeField]
         GameObject prefabParticles2;
+    [Header("MATERIALS")]
+        [SerializeField]
+        Material blue;
+        [SerializeField]
+        Material red;
+
 
     //Al iniciar el script
     private void OnEnable()
@@ -43,6 +49,10 @@ public class CapsulesTimer : MonoBehaviour
         sliderTimeLeft.gameObject.SetActive(true);
         timeText.gameObject.SetActive(true);
         capsule.gameObject.SetActive(true);
+
+        //El color de la cápsula es azul
+        capsule.gameObject.GetComponent<MeshRenderer>().material = blue;
+        //capsule.gameObject.LeanColor(Color.blue, 0.5f).setEaseInBack();
 
         //Se escala la nueva cápsula
         LeanTween.scale(capsule, Vector3.one, 1f).setEaseOutBack();
@@ -59,6 +69,15 @@ public class CapsulesTimer : MonoBehaviour
 
         //Se le da al texto para que muestre el valor en pantalla
         timeText.text = timer.ToString("00.00");
+
+        //Si el tiempo es menor a 10
+        if (timer <= 5.0f)
+        {
+            //La cápsula es de color rojo
+            capsule.gameObject.GetComponent<MeshRenderer>().material = red;
+            //capsule.gameObject.LeanColor(Color.red, 0.5f).setEaseInBack();
+
+        }
 
         //Si el tiempo es menor o igual a 0
         if (timer <= 0)

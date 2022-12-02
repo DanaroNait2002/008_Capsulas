@@ -172,10 +172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375f7fddeedc3314d9ba3bd33e000f42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 0
-  timeMax: 10
-  timeMin: 5
-  capsule: {fileID: 266612004346514134, guid: 577bebae31c34df4f8b4591e12a78526, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +334,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 89b4bf6aa393a3e42baf6efa2d80351e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

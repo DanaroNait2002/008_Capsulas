@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b413c8cd26119674898b308fa59ea18a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -116,11 +116,12 @@ MonoBehaviour:
   timeMin: 10
   timeMax: 30
   sliderTimeLeft: {fileID: 266612004593116593}
+  timeText: {fileID: 7137919360230036009}
   capsule: {fileID: 266612004346514134}
-  controller: {fileID: 123314446230677880, guid: 1c71b2491c461484fba5655022f6ff83, type: 3}
   prefabParticles: {fileID: 6169600736253694245, guid: 0d15108fb5eff2b48ba2616a2d842021, type: 3}
   prefabParticles2: {fileID: 6169600736253694245, guid: e76f683d51e09c04bb763258708a35e3, type: 3}
-  timeText: {fileID: 7137919360230036009}
+  blue: {fileID: 2100000, guid: b413c8cd26119674898b308fa59ea18a, type: 2}
+  red: {fileID: 2100000, guid: a3f3094d953a83f40a23593b18bc4fb1, type: 2}
 --- !u!1 &266612004364029210
 GameObject:
   m_ObjectHideFlags: 0
