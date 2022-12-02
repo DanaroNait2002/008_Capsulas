@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CapsulesTimer : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class CapsulesTimer : MonoBehaviour
     GameObject prefabParticles;
 
     [SerializeField]
+    TextMeshProUGUI timeText;
+
+    [SerializeField]
     StateManager currentState = StateManager.Waiting;
 
     public enum StateManager
@@ -49,10 +53,10 @@ public class CapsulesTimer : MonoBehaviour
 
     void Update()
     {
-        switch (currentState)
+        /*switch (currentState)
         {
             case StateManager.TimerOff:
-                DestroyCapsule();
+                currentState = StateManager.Destroy;
                 break;
 
             case StateManager.Destroy:
@@ -60,34 +64,42 @@ public class CapsulesTimer : MonoBehaviour
                 break;
 
             case StateManager.Waiting:
-                currentState = StateManager.Creating;
+                DestroyCapsule();
                 break;
 
             case StateManager.Creating:
                 CreateNewCapsule();
                 break;
-        }
+        }*/
 
         timer -= Time.deltaTime;
 
         sliderTimeLeft.value = timer;
 
+        timeText.text = timer.ToString("00.00");
+
         if (timer <= 0)
         {
             //timer = Random.Range(timeMin, timeMax);
-            currentState = StateManager.TimerOff;
+            //currentState = StateManager.TimerOff;
+            DestroyCapsule();
         }
     }
 
     void DestroyCapsule()
     {
+        //currentState = StateManager.Creating;
+
+        Instantiate(prefabParticles, capsule.transform.position, Quaternion.identity);
+
+        Instantiate(capsule, capsule.transform.position, Quaternion.identity);
+
         Destroy(gameObject);
-        currentState = StateManager.Destroy;
     }
 
     void CreateNewCapsule()
     {
-        Instantiate(prefabParticles, capsule.transform.position, Quaternion.identity);
+        //Instantiate(prefabParticles, capsule.transform.position, Quaternion.identity);
 
 
 
