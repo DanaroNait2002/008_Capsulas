@@ -5,32 +5,30 @@ using UnityEngine;
 
 public class CapsuleCreator : MonoBehaviour
 {
-    [SerializeField]
+    /*[SerializeField]
     float timer;
 
     [SerializeField]
-    float timeMax = 10f;
+    float timeMax = 1f;
 
     [SerializeField]
-    float timeMin = 5f;
+    float timeMin = 0f;
 
     [SerializeField]
     GameObject capsule;
 
-    private void OnEnabled()
+    private void Update()
+    {
+        
+    }
+
+    public void CreateCapsuleTimer()
     {
         timer = Random.Range(timeMin, timeMax);
-
-        timer -= Time.deltaTime;
-
-        if (timer <= 0)
-        {
-            CreateCapsule();
-        }
     }
 
     public void CreateCapsule()
     {
         Instantiate(capsule, capsule.transform.position, Quaternion.identity);
-    }
+    }*/
 }

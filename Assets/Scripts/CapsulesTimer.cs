@@ -6,106 +6,93 @@ using TMPro;
 
 public class CapsulesTimer : MonoBehaviour
 {
-    [SerializeField]
-    float timer;
+    [Header("TIME")] 
+        [SerializeField]
+        float timer;
+        [SerializeField]
+        float timeMin = 10f;
+        [SerializeField]
+        float timeMax = 30f;
 
-    [SerializeField]
-    float timeMin = 10f;
+    [Header("UI")]
+        [SerializeField]
+        Slider sliderTimeLeft;
+        [SerializeField]
+        TextMeshProUGUI timeText;
 
-    [SerializeField]
-    float timeMax = 30f;
+    [Header("GAMEOBJECT")]
+        [SerializeField]
+        GameObject capsule;
 
-    [SerializeField]
-    Slider sliderTimeLeft;
+    [Header("PARTICLE SYSTEM")]
+        [SerializeField]
+        GameObject prefabParticles;
+        [SerializeField]
+        GameObject prefabParticles2;
 
-    [SerializeField]
-    GameObject capsule;
-
-    [SerializeField]
-    GameObject controller;
-
-    [SerializeField]
-    GameObject prefabParticles;
-
-    [SerializeField]
-    TextMeshProUGUI timeText;
-
-    [SerializeField]
-    StateManager currentState = StateManager.Waiting;
-
-    public enum StateManager
+    //Al iniciar el script
+    private void OnEnable()
     {
-        Waiting,
-        TimerOn,
-        TimerOff,
-        Destroy,
-        Creating,
-    }
-
-    void Start()
-    {
+        //Se da valor a timer entre dos números aleatorios
         timer = Random.Range(timeMin, timeMax);
 
+        //Se le asigna el valor máximo del slider el valor de timer
         sliderTimeLeft.maxValue = timer;
 
-        currentState = StateManager.TimerOn;
+        //Se activan los elementos en caso de no estarlo (los nuevos)
+        sliderTimeLeft.gameObject.SetActive(true);
+        timeText.gameObject.SetActive(true);
+        capsule.gameObject.SetActive(true);
+
+        //Se escala la nueva cápsula
+        LeanTween.scale(capsule, Vector3.one, 1f).setEaseOutBack();
     }
 
+    //Cada Frame
     void Update()
     {
-        /*switch (currentState)
-        {
-            case StateManager.TimerOff:
-                currentState = StateManager.Destroy;
-                break;
-
-            case StateManager.Destroy:
-                currentState = StateManager.Waiting;
-                break;
-
-            case StateManager.Waiting:
-                DestroyCapsule();
-                break;
-
-            case StateManager.Creating:
-                CreateNewCapsule();
-                break;
-        }*/
-
+        //A timer se le resta valor en relación al tiempo
         timer -= Time.deltaTime;
 
+        //Se le asigna de valor al slider el de timer
         sliderTimeLeft.value = timer;
 
+        //Se le da al texto para que muestre el valor en pantalla
         timeText.text = timer.ToString("00.00");
 
+        //Si el tiempo es menor o igual a 0
         if (timer <= 0)
         {
-            //timer = Random.Range(timeMin, timeMax);
-            //currentState = StateManager.TimerOff;
+            //Se llama a la funcíón:
             DestroyCapsule();
+
+            //El slider y el texto se desactivan
+            sliderTimeLeft.gameObject.SetActive(false);
+            timeText.gameObject.SetActive(false);
+
+            //Timer se convierte en 2 para no crear problemas
+            timer = 2f;
         }
     }
 
     void DestroyCapsule()
     {
-        //currentState = StateManager.Creating;
+        //La cápsula se escala a 0
+        LeanTween.scale(capsule, Vector3.zero, 1f).setEaseInBack().setOnComplete(DestroyCapsuleEnd);
 
+        //Se instancian las partículas
         Instantiate(prefabParticles, capsule.transform.position, Quaternion.identity);
-
-        Instantiate(capsule, capsule.transform.position, Quaternion.identity);
-
-        Destroy(gameObject);
     }
 
-    void CreateNewCapsule()
+    void DestroyCapsuleEnd()
     {
-        //Instantiate(prefabParticles, capsule.transform.position, Quaternion.identity);
+        //Se instancia la nueva capsula en la posición de la anterior
+        Instantiate(capsule, capsule.transform.position, Quaternion.identity);
 
+        //Se instancian las nuevas partículas
+        Instantiate(prefabParticles2, capsule.transform.position, Quaternion.identity);
 
-
-        //Instantiate(capsule, capsule.transform.position, Quaternion.identity);
-
-        /*CapsuleCreator capsuleCreator = controller.GetComponent<CapsuleCreator>();
-        capsuleCreator.CreateCapsule();*/
+        //Se destruye el objeto
+        Destroy(capsule);
     }
 }
