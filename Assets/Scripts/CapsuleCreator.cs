@@ -5,30 +5,24 @@ using UnityEngine;
 
 public class CapsuleCreator : MonoBehaviour
 {
-    /*[SerializeField]
-    float timer;
+    [Header("GAMEOBJECTS")]
+        [SerializeField]
+        GameObject capsule;
 
+    [Header("PARTICLESSYSTEM")]
     [SerializeField]
-    float timeMax = 1f;
+    GameObject prefabParticles;
 
-    [SerializeField]
-    float timeMin = 0f;
+    Vector3 pos;
 
-    [SerializeField]
-    GameObject capsule;
-
-    private void Update()
+    public void CapsuleCreation()
     {
-        
+        pos = new Vector3(Random.Range(-8, 8), 1.2f, Random.Range(-8, 8));
+
+        //Se instancia la nueva capsula en la posición de la anterior
+        Instantiate(capsule, pos, Quaternion.identity);
+
+        //Se instancian las nuevas partículas
+        Instantiate(prefabParticles, capsule.transform.position, Quaternion.identity);
     }
-
-    public void CreateCapsuleTimer()
-    {
-        timer = Random.Range(timeMin, timeMax);
-    }
-
-    public void CreateCapsule()
-    {
-        Instantiate(capsule, capsule.transform.position, Quaternion.identity);
-    }*/
 }

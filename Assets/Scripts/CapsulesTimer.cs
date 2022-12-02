@@ -23,12 +23,13 @@ public class CapsulesTimer : MonoBehaviour
     [Header("GAMEOBJECT")]
         [SerializeField]
         GameObject capsule;
+        [SerializeField]
+        GameObject controller;
 
     [Header("PARTICLE SYSTEM")]
         [SerializeField]
         GameObject prefabParticles;
-        [SerializeField]
-        GameObject prefabParticles2;
+
     [Header("MATERIALS")]
         [SerializeField]
         Material blue;
@@ -105,11 +106,8 @@ public class CapsulesTimer : MonoBehaviour
 
     void DestroyCapsuleEnd()
     {
-        //Se instancia la nueva capsula en la posición de la anterior
-        Instantiate(capsule, capsule.transform.position, Quaternion.identity);
-
-        //Se instancian las nuevas partículas
-        Instantiate(prefabParticles2, capsule.transform.position, Quaternion.identity);
+        //Buscamos en el otr script esta función:
+        controller.GetComponent<CapsuleCreator>().CapsuleCreation();
 
         //Se destruye el objeto
         Destroy(capsule);
